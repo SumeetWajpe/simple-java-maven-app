@@ -13,8 +13,10 @@ pipeline{
         stage("build"){
             
             steps{
-                echo "Building the application"
+                echo 'Building the application'
                 echo "building version ${NEW_VERSION}"
+                echo 'building version ${NEW_VERSION}'
+                
                 //sh 'mvn -B -DskipTests clean package'
             }
         }
