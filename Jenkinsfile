@@ -3,6 +3,7 @@ pipeline{
 
     environment {
         NEW_VERSION = '1.3.0'
+        //SERVER_CREDENTIALS = credentials('sumeet-dockerhub')
     }
 
     tools{
@@ -29,6 +30,11 @@ pipeline{
         stage("deploy"){
             steps{
                 echo "deploying the application"
+                withCredentials([
+                    usernamePassword(credentials: 'server-credentials', usernameVariable: USER,passwordVariable: PWD)
+                ])
+
+                sh "somescript ${USER} ${PWD} "
             }
         }
     }
