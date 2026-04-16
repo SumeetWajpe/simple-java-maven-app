@@ -1,3 +1,4 @@
+def gv
 pipeline{
     agent any
 
@@ -17,14 +18,20 @@ pipeline{
     }
 
     stages{
+        stage('init'){
+            steps{
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
         stage("build"){
             
             steps{
-                echo 'Building the application'
-                echo "building version ${NEW_VERSION}"
-                echo 'building version ${NEW_VERSION}'
-                
-                //sh 'mvn -B -DskipTests clean package'
+                script{
+                    gv.buildApp() 
+                }
+               
             }
         }
         stage("test"){
